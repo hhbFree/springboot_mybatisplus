@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+    <OBJECT id=jsp classid="clsid:7126812F-8D2A-11D6-9C69-00E04C103A76"></OBJECT>
+
+    <script language="javascript">
+
+        var KP={
+            kpdriver:null,
+            isOpen:false,
+            isSetup:true,
+
+            openCard:function(pwd){
+                if (this.isOpen){
+                    return true;
+                }
+                if (!this.isSetup){
+                    return false;
+                }
+                try{
+                    //CollectGarbage();
+                    // V2.0
+                    if(pwd!=null && pwd.length!=0){
+                        this.kpdriver.CertPassWord=pwd;
+                    }else{
+                        alert('未设置税务数字证书密码');
+                        return;
+                    }
+                    this.kpdriver.OpenCard();
+                    if(this.kpdriver.RetCode=="1011"){
+                        this.isOpen = true;
+                        return true;
+                    }else if (this.kpdriver.RetCode=="1007"){
+                        alert("金税卡已经被占用，请退出所有可能使用金税卡的程序后重试");
+                    }else if (this.kpdriver.RetCode=="1001"){
+                        alert("开票信息初始化失败，请重启浏览器或重装开票系统后重试");
+                    }else if (this.kpdriver.RetCode=="1005"){
+                        closeCard();
+                        checkSetup();
+                    }else {
+                        alert("金税卡开启失败，错误代码："+this.kpdriver.RetCode);
+                    }
+                    return false;
+                }catch(e) {
+                    alert("开票组件出错，错误信息为："+e.description);
+                    closeCard();
+                    return false;
+                }
+            }
+        };
+
+
+
+
+
+
+
+        function OpenCard() {
+
+            KP.kpdriver=jsp
+            KP.openCard('12345678')
+        }
+
+        function closeCard(){
+
+            try{
+                jsp.CloseCard();
+                alert("执行结果：" + jsp.RetMsg);
+            }catch(e){
+
+                alert("异常：" + e.message);
+            }
+
+
+        }
+
+
+
+        function invoice(){
+            try{
+                debugger
+                console.log(jsp)
+                //初始化
+                jsp.InvInfoInit();
+                //发票类型 y
+                jsp.InfoKind=2;//普通发票
+                //购方名称 y
+                jsp.InfoClientName = '北京学士书店有限责任公司';
+                //购方税号 y
+                jsp.InfoClientTaxCode = '110101101291580';
+
+                //购方银行账号 y
+                jsp.InfoClientBankAccount = '2001201026104128';
+
+                //购方地址电话 y
+                jsp.InfoClientAddressPhone = '13211111111';
+
+
+                //销方地址电话 y
+                jsp.InfoSellerAddressPhone = '13811111111';
+
+                //销方银行账号 n
+                jsp.InfoSellerBankAccount = '2001201026104128';
+
+                //发票备注 y
+                jsp.InfoNotes = '1234';
+
+                //开票人 n
+                jsp.InfoInvoicer = 'hhb';
+
+                //复核人 n
+                jsp.InfoChecker = 'zjx';
+
+                //收款人 y
+                jsp.InfoCashier = 'hbHao';
+
+
+                //清空商品集合
+                jsp.ClearInvList();
+
+                for (var i=0;i<1;i++)
+                {
+
+                    //设置商品集合
+                    jsp.InvListInit();
+                    //商品名称 y
+                    jsp.ListGoodsName = '设备费';
+
+
+                    //规则型号
+                    jsp.ListStandard = '';
+
+
+
+                    //计量单位 y
+                    jsp.ListUnit='';
+
+
+                    //数量 y
+                    jsp.ListNumber='1';
+
+
+                    //单价 y
+                    jsp.ListPrice = '0';
+
+
+                    //金额 y
+                    jsp.ListAmount='100';
+
+
+                    //税额
+                    jsp.ListTaxAmount='17';
+
+                    //含税标志0：不含税，1：含税
+                    jsp.ListPriceKind = 0;
+                    var rate='10'
+
+                    //批量上传
+                    var load='<?xml version="1.0" encoding="GBK"?><FPFP><xmlName>1231</xmlName><DATA><FPZL>2</FPZL><FPDM>109050804</FPDM><FPHM>0</FPHM></DATA></FPFP>'
+                    jsp.BatchUpload(load);
+
+                    //装入商品集合
+                    jsp.AddInvList();
+                }
+
+                // // V2.0
+                // jsp.CheckEWM = 0;
+                //
+                // jsp.Invoice();
+                //
+                //
+                // var result = {};
+                // /*这里必须将ActiveX对象里的值转成字符串才能正确的在参数中传递*/
+                // //合计不含税金额
+                // result['infoAmount'] = jsp.InfoAmount+'';
+                // //合计税额
+                // result['infoTaxAmount'] = jsp.InfoTaxAmount+'';
+                // //开票日期
+                // result['infoDate'] = jsp.InfoDate;
+                // //所属月份
+                // result['infMonth'] = jsp.InfMonth+'';
+                // //发票十位代码
+                // result['infoTypeCode'] = jsp.InfoTypeCode+'';
+                // //发票号码
+                // result['infoNumber'] = jsp.InfoNumber+'';
+                // //销货清单标志， 0 – 无销货清单， 1 – 有销货清单
+                // result['goodsListFlag'] = jsp.GoodsListFlag+'';
+                // //返回状态
+                // result['retCode'] = jsp.RetCode+'';
+                // //返回信息
+                // result['retMsg'] = jsp.RetMsg+'';
+                // result['cipher'] = jsp.Cipher+'';//发票密文
+                // result['checkCode'] = jsp.CheckCode+'';//校验码
+                // //result['sign'] = jsp.Sign+'';
+                //
+                // //开票机号
+                // //result['machineNo'] = jsp.MachineNo+'';
+                // //税率
+                // //result['taxrate'] = jsp.InfoTaxRate+'';
+                // console.log(result)
+                // alert(result)
+                // //uploadInvoice(result.infoNumber,result.infoTypeCode);
+                // //alert("执行结果：" + jsp.RetCode);
+            }catch(e){
+
+                alert("异常：" + e.message);
+            }
+        }
+
+        function uploadInvoice(infoNumber,infoTypeCode){
+
+            try{
+                jsp.infoTypeCode=infoTypeCode;
+                jsp.infoNumber=infoNumber;
+                jsp.UploadInvoice();
+                alert("执行结果：" + jsp.RetCode);
+            }catch(e){
+
+                alert("异常：" + e.message);
+            }
+
+
+        }
+
+
+
+    </script>
+
+</head>
+
+<body>
+<h3>1.安装和注册TaxCardX.dll 2.用IE运行 3.在开票系统log日志下有内容表示成功</h3>
+<input type="button" onclick="OpenCard()" value="开启金税盘"/>
+<input type="button" onclick="invoice()" value="开具发票"/>
+<input type="button" onclick="uploadInvoice()" value="上传发票"/>
+
+<input type="button" onclick="closeCard()" value="关闭金税盘"/>
+</body>
+
+</html>

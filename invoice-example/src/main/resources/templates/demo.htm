@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+    <OBJECT id=jsp classid="clsid:7126812F-8D2A-11D6-9C69-00E04C103A76"></OBJECT>
+
+    <script language="javascript">
+	
+	
+		
+
+        function OpenCard() {
+
+            try {
+
+                jsp.OpenCard();
+                alert("执行结果：" + jsp.RetMsg);
+            } catch (e) {
+                alert("异常：" + e.message);
+            }
+        }
+
+        function closeCard(){
+
+                try{
+                    jsp.CloseCard();
+                    alert("执行结果：" + jsp.RetMsg);
+                }catch(e){
+
+                    alert("异常：" + e.message);
+                }
+
+
+        }
+
+       
+		
+		function invoice(){
+		try{
+			jsp.InvInfoInit();
+			//发票类型 y
+			jsp.InfoKind='1234';
+			//购方名称 y
+			jsp.InfoClientName = '1234';
+			//购方税号 y
+			if ('1234'!=null )
+			{
+				jsp.InfoClientTaxCode = '1234';
+			}
+			//购方银行账号 y
+			if ('1234'!=null ){
+				jsp.InfoClientBankAccount = '1234';
+			}
+			//购方地址电话 y
+			if ('1234'!=null ){
+				jsp.InfoClientAddressPhone = '1234';
+			}
+
+			//销方地址电话 y
+			if ('1234'!=null )
+			{
+				jsp.InfoSellerAddressPhone = '1234';
+			}
+			//销方银行账号 n
+			if ('1234'!=null ){
+				jsp.InfoSellerBankAccount = '1234';
+			}
+			//发票备注 y
+			if ('1234'!=null ){
+				jsp.InfoNotes = '1234';
+			}
+			//开票人 n
+			if ('1234'!=null ){
+				jsp.InfoInvoicer = '1234';
+			}
+			//复核人 n
+			if ('1234'!=null ){
+				jsp.InfoChecker = '1234';
+			}
+			//收款人 y
+			if ('1234'!=null ){
+				jsp.InfoCashier = '1234';
+			}
+
+			
+
+				jsp.InvListInit();
+				//商品名称 y
+				if ('1234'!=null )
+				{
+					jsp.ListGoodsName = '1234';
+				}
+				
+				
+				//规则型号
+				if ('1234'!=null ){
+					jsp.ListStandard = '1234';
+				}
+				
+				
+				//单价 y
+				if('1234'!=null !=''){
+					jsp.ListUnit='1234';
+				}
+				
+				//数量 y
+				if('1234'!=null){
+					jsp.ListNumber='1234';
+				}
+				
+				//金额 y
+				if('1234'!=null){
+					jsp.ListPrice = '1234';
+				}
+				
+				//数量 y
+				if('1'!=null){
+					jsp.ListAmount='1';
+				}
+					
+				//税额
+				if('1234'!=null){
+					jsp.ListTaxAmount='1234';
+				}
+				//含税标志0：不含税，1：含税
+				jsp.ListPriceKind = 0;
+				var rate='123'
+
+				var goodstaxno = '123';
+				jsp.BatchUpload(goodstaxno);
+				jsp.AddInvList();
+
+			
+			// V2.0
+			jsp.CheckEWM = 0;
+			
+			jsp.Invoice();
+
+			
+			var result = {};
+			/*这里必须将ActiveX对象里的值转成字符串才能正确的在参数中传递*/
+			//合计不含税金额
+			result['infoAmount'] = jsp.InfoAmount+'';
+			//合计税额
+			result['infoTaxAmount'] = jsp.InfoTaxAmount+'';
+			//开票日期
+			result['infoDate'] = new Date(jsp.InfoDate+'').Format('yyyy-MM-dd hh:mm:ss');
+			//所属月份
+			result['infMonth'] = jsp.InfMonth+'';
+			//发票十位代码
+			result['infoTypeCode'] = jsp.InfoTypeCode+'';
+			//发票号码
+			result['infoNumber'] = jsp.InfoNumber+'';
+			//销货清单标志， 0 – 无销货清单， 1 – 有销货清单
+			result['goodsListFlag'] = jsp.GoodsListFlag+'';
+			//返回状态
+			result['retCode'] = jsp.RetCode+'';
+			//返回信息
+			result['retMsg'] = jsp.RetMsg+'';
+			result['cipher'] = jsp.Cipher+'';//发票密文
+			result['checkCode'] = jsp.CheckCode+'';//校验码
+			//result['sign'] = jsp.Sign+'';
+			
+			//开票机号
+			//result['machineNo'] = jsp.MachineNo+'';
+			//税率
+			//result['taxrate'] = jsp.InfoTaxRate+'';
+			return result;
+
+		}catch(e){
+			var result = {};
+			result['retCode'] = e.description+'';
+			return result;
+		}
+	}
+		
+		
+
+
+    </script>
+
+</head>
+
+<body>
+<h3>1.安装和注册TaxCardX.dll 2.用IE运行 3.在开票系统log日志下有内容表示成功</h3>
+<input type="button" onclick="OpenCard()" value="开启金税盘"/>
+<input type="button" onclick="Invoice()" value="开具发票"/>
+<input type="button" onclick="closeCard()" value="关闭金税盘"/>
+</body>
+
+</html>

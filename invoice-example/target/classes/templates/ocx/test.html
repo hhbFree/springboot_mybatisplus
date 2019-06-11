@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+    <OBJECT id=jsp classid="clsid:7126812F-8D2A-11D6-9C69-00E04C103A76"></OBJECT>
+
+</head>
+
+<body>
+<h3>1.安装和注册TaxCardX.dll 2.用IE运行 3.在开票系统log日志下有内容表示成功</h3>
+    <input type="button" onclick="OpenCard()" value="OpenCard"/>
+</body>
+
+<script language="javascript" type ="text/javascript">
+
+    function OpenCard() {
+
+        try {
+            jsp.OpenCard();
+            alert("执行结果：" + jsp.RetMsg);
+        } catch (e) {
+            alert("异常：" + e.message);
+        }
+    }
+
+</script>
+
+</html>

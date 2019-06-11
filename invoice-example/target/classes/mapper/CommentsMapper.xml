@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisino.invoice.dao.DealDataDao">
+    <resultMap type="com.aisino.invoice.vo.Customer" id="customerResult">
+        <id column="ORG_CUSTOMER_ID" property="customerId"/>
+        <result column="CUST_CLASS_ID" property="classId"/>
+        <result column="CUST_TAX_CODE" property="customerTaxCode"/>
+        <result column="TAX_BUREAU_ID" property="taxBureauId"/>
+        <result column="notes" property="notes"/>
+        <result column="CUST_NAME" property="customerName"/>
+        <result column="legal_person" property="legalPerson"/>
+        <result column="registered_fund" property="registeredFund"/>
+        <result column="tel1" property="tel1"/>
+        <result column="tel2" property="tel2"/>
+        <result column="tel3" property="tel3"/>
+        <result column="mobile" property="mobile"/>
+        <result column="account_bank" property="accountBank"/>
+        <result column="bank_account" property="bankAccount"/>
+        <result column="INVOICE_TEL" property="invoiceTel"/>
+        <result column="INVOICE_ADDR" property="invoiceAddr"/>
+        <result column="INVOICE_NAME" property="invoiceName"/>
+        <result column="CREATE_DATE" property="createDate"/>
+        <result column="vocation_id" property="vocationId"/>
+        <result column="IS_VALID" property="isValid"/>
+    </resultMap>
+
+    <select id="getCustomer" resultMap="customerResult">
+
+       select ORG_CUSTOMER_ID,CUST_CLASS_ID,CUST_TAX_CODE,TAX_BUREAU_ID,notes,CUST_NAME,
+        legal_person,registered_fund,tel1,tel2,tel3,mobile,account_bank,bank_account,
+        INVOICE_TEL,INVOICE_ADDR,INVOICE_NAME,CREATE_DATE,vocation_id,IS_VALID  from CUS_ORG_CUSTOMER
+
+    </select>
+
+    <insert id="insertCustomer" parameterType="com.aisino.invoice.vo.Customer">
+        insert into TJHT_CUSTOMER_COPY
+          (CUSTOMER_ID,
+           KHLX,
+           FJID,
+           KHMC_KP,
+           KHMC_LX,
+           KHDZ_KP,
+           SH,
+           BANK,
+           BANK_ACCOUNT,
+           KHDH_KP,
+           TEL1,
+           TEL2,
+           TEL3,
+           MOBILE,
+           NOTES,
+           IS_VALID,
+           CREATE_DATE,
+           FRDB,
+           ZCZJ
+           )
+        values
+          (#{customerId,jdbcType=NUMERIC},#{classId,jdbcType=NUMERIC},#{taxBureauId,jdbcType=NUMERIC},#{invoiceName,jdbcType=VARCHAR},#{customerName,jdbcType=VARCHAR},#{invoiceAddr,jdbcType=VARCHAR},#{customerTaxCode,jdbcType=VARCHAR},
+          #{accountBank,jdbcType=VARCHAR},#{bankAccount,jdbcType=VARCHAR},#{invoiceTel,jdbcType=VARCHAR},#{tel1,jdbcType=VARCHAR},#{tel2,jdbcType=VARCHAR},#{tel3,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR},
+          #{notes,jdbcType=VARCHAR},#{isValid,jdbcType=NUMERIC},#{createDate},#{legalPerson,jdbcType=VARCHAR},#{registeredFund,jdbcType=NUMERIC}
+          )
+    </insert>
+    <select id="queryRoleIds" resultType="long">
+        select ROLEID from TJHT_SYS_USER_ROLE where USERID=1000037
+    </select>
+
+
+    <select id="queryUserIds" resultType="long">
+        select USERID from cs_role
+    </select>
+
+
+    <insert id="insertUserRole" parameterType="map">
+        insert into TJHT_SYS_USER_ROLE(USERID,ROLEID) values(#{userId},#{roleId})
+    </insert>
+
+
+</mapper>
