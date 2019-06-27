@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="logPatternConsoleLog" value="%date{yyyy-MM-dd HH:mm:ss} | %yellow(%-5level) | %magenta(%t) | %cyan(%logger) | %msg%n"/>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${logPatternConsoleLog}</pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- 日志生成位置 -->
+    <appender name="eventFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>C:/logs/management/management.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover 保存历史记录到这个文件夹一日起为后缀 -->
+            <FileNamePattern>C:/logs/management/management.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+    </appender>
+
+    <logger name="com.aisino.sync.mapper" additivity="true">
+        <level value="DEBUG" />
+    </logger>
+
+    <!-- 打印 日志级别-->
+    <root level="info">
+        <appender-ref ref="eventFile" />
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
