@@ -61,12 +61,12 @@
           )
     </insert>
     <select id="queryRoleIds" resultType="long">
-        select ROLEID from TJHT_SYS_USER_ROLE where USERID=1000037
+        select roleid from cs_roleid
     </select>
 
 
     <select id="queryUserIds" resultType="long">
-        select USERID from cs_role
+        select distinct CGUID from AOS_RMS_USER
     </select>
 
 
