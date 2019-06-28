@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisino.invoice.dao.RcDao">
+
+
+    <select id="findGoodsIdByCode" resultType="map" parameterType="map">
+       select * from tjht_sys_goods where GOODSCODE=#{code,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findRcId" resultType="int">
+       select SEQ_TJHT_RK_CGRK.nextval from dual
+    </select>
+
+    <select id="findRcMxId" resultType="int">
+           select SEQ_TJHT_RK_RKMX.nextval from dual
+        </select>
+
+
+    <select id="findStoreIdByName" resultType="int">
+       select STOREHOUSE_ID from SYS_STOREHOUSE where  STOREHOUSE_NAME=#{storeName,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertRc" parameterType="map">
+        insert into TJHT_RK_CGRK t (t.rkid,t.rkr_id,t.rkr_name,t.rkr_dempid,t.rklx,t.rkje,t.bz,t.zdr_id,t.zdr_name,t.zdr_dempid,t.kfmc,t.kf_id,t.rk_order_id,t.djlx,t.order_gysid,t.order_gysmc,t.SHR_ID,t.SHR_NAME,t.SHBZ)
+        values (#{rkid,jdbcType=NUMERIC},#{rkr_id,jdbcType=VARCHAR},#{rkr_name,jdbcType=VARCHAR},#{rkr_dempid,jdbcType=VARCHAR},
+        #{rklx,jdbcType=VARCHAR},#{rkje,jdbcType=NUMERIC},#{bz,jdbcType=VARCHAR},#{zdr_id,jdbcType=VARCHAR},#{zdr_name,jdbcType=VARCHAR},#{zdr_dempid,jdbcType=NUMERIC},
+        #{kfmc,jdbcType=VARCHAR},#{kf_id,jdbcType=NUMERIC},#{rk_order_id,jdbcType=VARCHAR},#{djlx,jdbcType=VARCHAR},#{order_gysid,jdbcType=NUMERIC},#{order_gysmc,jdbcType=VARCHAR},#{shr_id,jdbcType=NUMERIC},#{shr_name,jdbcType=VARCHAR},1)
+    </insert>
+
+    <insert id="insertRcmx" parameterType="map">
+      insert into TJHT_RK_RKMX t (t.rkid,t.rkmxid,t.rkpc,t.kh,t.xlh,t.spbm,t.spmc,t.spxh,t.spdw,t.spsl,t.nospsl,t.spdj,t.kfmc,t.rkje,t.sqr_id,t.sqr_name,t.order_gysid,t.order_gysmc,t.ddmxid,t.bhsje)
+      values (#{rkid,jdbcType=NUMERIC},#{rkmxid,jdbcType=VARCHAR},'','','',#{spbm,jdbcType=VARCHAR},#{spmc,jdbcType=VARCHAR},#{spxh,jdbcType=VARCHAR},#{spdw,jdbcType=VARCHAR},
+       #{spsl,jdbcType=NUMERIC}, #{spsl,jdbcType=NUMERIC},
+      #{spdj,jdbcType=NUMERIC},#{kfmc,jdbcType=VARCHAR},#{rkje,jdbcType=NUMERIC},#{sqr_id,jdbcType=NUMERIC},
+      #{sqr_name,jdbcType=VARCHAR},#{order_gysid,jdbcType=NUMERIC},
+      #{order_gysmc,jdbcType=VARCHAR},null,#{bhsje,jdbcType=NUMERIC})
+        </insert>
+
+
+</mapper>

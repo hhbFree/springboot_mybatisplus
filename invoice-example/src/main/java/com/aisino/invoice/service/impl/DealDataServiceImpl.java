@@ -50,8 +50,6 @@ public class DealDataServiceImpl implements DealDataService {
                 this.dealDataDao.insertUserRole(map);
             }
         }
-
-
         return "插入成功";
     }
 }

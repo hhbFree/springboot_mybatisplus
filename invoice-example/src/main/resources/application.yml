@@ -25,17 +25,17 @@ spring:
         master:
           username: root
           password: zzsdzfp@123456
-          url: jdbc:
+          url: jdbc:mysql://192.168.100.185:3306/af40?useUnicode=true&amp;characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
           driver-class-name: com.mysql.jdbc.Driver
         mysql_af41:
           username: root
           password: zzsdzfp@123456
-          url: jdbc:
+          url: jdbc:mysql://192.168.100.185:3306/af41?useUnicode=true&amp;characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
           driver-class-name: com.mysql.jdbc.Driver
         oracle:
           username: CRM
           password: CRM
-          url: 
+          url: jdbc:oracle:thin:@192.168.100.45:1521:ORCL
           driver-class-name: oracle.jdbc.driver.OracleDriver
 
 
