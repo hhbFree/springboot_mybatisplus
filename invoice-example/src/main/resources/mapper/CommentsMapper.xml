@@ -33,7 +33,7 @@
     </select>
 
     <insert id="insertCustomer" parameterType="com.aisino.invoice.vo.Customer">
-        insert into TJHT_CUSTOMER_COPY
+        insert into TJHT_CUSTOMER
           (CUSTOMER_ID,
            KHLX,
            FJID,

@@ -73,8 +73,8 @@ public class kcTest {
 
         FileInputStream inputStream;
 
-//        inputStream = new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\母公司可用量6.28.xlsx"));
-        inputStream = new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\子公司可用量6.28.xlsx"));
+        inputStream = new FileInputStream(new File("E:\\子公司.xlsx"));
+//      inputStream = new FileInputStream(new File("C:\\Users\\Administrator\\Desktop\\子公司可用量6.28.xls"));
         ExcelParser pa = new ExcelParser();
         ExcelParser parse = pa.parse(inputStream);
 
@@ -107,27 +107,27 @@ public class kcTest {
                 dataRow.createCell(13).setCellValue(data[13]);
 
 
-                Integer StoreId=this.rcDao.findStoreIdByName(mapXml);
-                if (StoreId==null){
-                    System.out.println("找不到库房："+data[2]);
-
-                    HSSFRow dataRow2 = sheet2.createRow(sheet2.getLastRowNum()+1);
-                    dataRow2.createCell(0).setCellValue(data[0]);
-                    dataRow2.createCell(1).setCellValue(data[1]);
-                    dataRow2.createCell(2).setCellValue(data[2]);
-                    dataRow2.createCell(3).setCellValue(data[3]);
-                    dataRow2.createCell(4).setCellValue(data[4]);
-                    dataRow2.createCell(5).setCellValue(data[5]);
-                    dataRow2.createCell(6).setCellValue(data[6]);
-                    dataRow2.createCell(7).setCellValue(data[7]);
-                    dataRow2.createCell(8).setCellValue(data[8]);
-                    dataRow2.createCell(9).setCellValue(data[9]);
-                    dataRow2.createCell(10).setCellValue(data[10]);
-                    dataRow2.createCell(11).setCellValue(data[11]);
-                    dataRow2.createCell(12).setCellValue(data[12]);
-                    dataRow2.createCell(13).setCellValue(data[13]);
-
-                }
+//                Integer StoreId=this.rcDao.findStoreIdByName(mapXml);
+//                if (StoreId==null){
+//                    System.out.println("找不到库房："+data[2]);
+//
+//                    HSSFRow dataRow2 = sheet2.createRow(sheet2.getLastRowNum()+1);
+//                    dataRow2.createCell(0).setCellValue(data[0]);
+//                    dataRow2.createCell(1).setCellValue(data[1]);
+//                    dataRow2.createCell(2).setCellValue(data[2]);
+//                    dataRow2.createCell(3).setCellValue(data[3]);
+//                    dataRow2.createCell(4).setCellValue(data[4]);
+//                    dataRow2.createCell(5).setCellValue(data[5]);
+//                    dataRow2.createCell(6).setCellValue(data[6]);
+//                    dataRow2.createCell(7).setCellValue(data[7]);
+//                    dataRow2.createCell(8).setCellValue(data[8]);
+//                    dataRow2.createCell(9).setCellValue(data[9]);
+//                    dataRow2.createCell(10).setCellValue(data[10]);
+//                    dataRow2.createCell(11).setCellValue(data[11]);
+//                    dataRow2.createCell(12).setCellValue(data[12]);
+//                    dataRow2.createCell(13).setCellValue(data[13]);
+//
+//                }
 
                 continue;
             }
@@ -177,26 +177,26 @@ public class kcTest {
             mapXml.put("storeName",data[8]);
             //根据库房名称查询库房id
             Integer StoreId=this.rcDao.findStoreIdByName(mapXml);
-//           if (StoreId==null){
-//               System.out.println("找不到库房："+data[2]);
-//
-//               HSSFRow dataRow = sheet2.createRow(sheet2.getLastRowNum()+1);
-//               dataRow.createCell(0).setCellValue(data[0]);
-//               dataRow.createCell(1).setCellValue(data[1]);
-//               dataRow.createCell(2).setCellValue(data[2]);
-//               dataRow.createCell(3).setCellValue(data[3]);
-//               dataRow.createCell(4).setCellValue(data[4]);
-//               dataRow.createCell(5).setCellValue(data[5]);
-//               dataRow.createCell(6).setCellValue(data[6]);
-//               dataRow.createCell(7).setCellValue(data[7]);
-//               dataRow.createCell(8).setCellValue(data[8]);
-//               dataRow.createCell(9).setCellValue(data[9]);
-//               dataRow.createCell(10).setCellValue(data[10]);
-//               dataRow.createCell(11).setCellValue(data[11]);
-//               dataRow.createCell(12).setCellValue(data[12]);
-//               dataRow.createCell(13).setCellValue(data[13]);
-//               continue;
-//           }
+           if (StoreId==null){
+               System.out.println("找不到库房："+data[2]);
+
+               HSSFRow dataRow = sheet2.createRow(sheet2.getLastRowNum()+1);
+               dataRow.createCell(0).setCellValue(data[0]);
+               dataRow.createCell(1).setCellValue(data[1]);
+               dataRow.createCell(2).setCellValue(data[2]);
+               dataRow.createCell(3).setCellValue(data[3]);
+               dataRow.createCell(4).setCellValue(data[4]);
+               dataRow.createCell(5).setCellValue(data[5]);
+               dataRow.createCell(6).setCellValue(data[6]);
+               dataRow.createCell(7).setCellValue(data[7]);
+               dataRow.createCell(8).setCellValue(data[8]);
+               dataRow.createCell(9).setCellValue(data[9]);
+               dataRow.createCell(10).setCellValue(data[10]);
+               dataRow.createCell(11).setCellValue(data[11]);
+               dataRow.createCell(12).setCellValue(data[12]);
+               dataRow.createCell(13).setCellValue(data[13]);
+               continue;
+           }
 
             map.put("kf_id",StoreId);
 
@@ -251,14 +251,16 @@ public class kcTest {
 
             mapMx.put("ddmxid",null);
 
+            if(mapG.get("SLV")!=null&&rkje!=null&&mapG.get("SLV")!=""){
 
             mapMx.put("bhsje",rkje/(1+Double.parseDouble(mapG.get("SLV").toString()))*+Double.parseDouble(mapG.get("SLV").toString()));// rkje/(1+slv1)*slv1;//含税金额
+            }
 
             this.rcDao.insertRcmx(mapMx);
         }
 
         //输出Excel文件1
-        FileOutputStream output=new FileOutputStream("C:\\Users\\Administrator\\Desktop\\111\\子公司库房.xlsx");
+        FileOutputStream output=new FileOutputStream("C:\\Users\\Administrator\\Desktop\\子公司.xlsx");
         wb.write(output);//写入磁盘
         output.close();
 

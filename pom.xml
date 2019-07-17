@@ -31,6 +31,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+
         </dependency>
 
         <dependency>
@@ -43,6 +50,7 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.1.10</version>
+
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity-engine-core -->
@@ -302,6 +310,9 @@
             <artifactId>persistence-api</artifactId>
             <version>1.0.2</version>
         </dependency>
+
+
+
     </dependencies>
 
     <repositories>

@@ -12,6 +12,18 @@
     <artifactId>invoice-example</artifactId>
 
     <dependencies>
+        <!-- webmagic 网络爬虫jar -->
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>webmagic-extension</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.0-jre</version>
+        </dependency>
 
     </dependencies>
 </project>
